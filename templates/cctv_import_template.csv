@@ -1,0 +1,6 @@
+id,name,jenis,merk,type,ip,gateway,rtsp_url
+CCTV-001,Simpang Utama 1,Fixed,Hikvision,IP Camera,192.168.1.101,192.168.1.1,rtsp://admin:password@192.168.1.101:554/Streaming/Channels/101
+CCTV-002,Simpang Utama 2,Dome,Dahua,IP Camera,192.168.1.102,192.168.1.1,rtsp://admin:password@192.168.1.102:554/cam/realmonitor?channel=1&subtype=0
+CCTV-003,Batas Kota Barat,PTZ,Hikvision,IP Camera,192.168.1.103,192.168.1.1,rtsp://admin:password@192.168.1.103:554/Streaming/Channels/101
+CCTV-004,Batas Kota Timur,Fixed,Hikvision,IP Camera,192.168.1.104,192.168.1.1,rtsp://admin:password@192.168.1.104:554/Streaming/Channels/101
+CCTV-005,Pintu Tol Utara,Fixed,Sony,IP Camera,192.168.1.105,192.168.1.1,rtsp://admin:password@192.168.1.105:554/media/video1

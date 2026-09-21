@@ -1,0 +1,40 @@
+{
+  "backend_api_url": "http://localhost:5000/api/vehicle-counts/record",
+  "confidence_threshold": 0.35,
+  "frame_skip": 7,
+  "inference_width": 576,
+  "cameras": [
+    {
+      "id": "CCTV-001",
+      "name": "Batas Kota Timur (Simulasi)",
+      "ip": "192.168.1.101",
+      "rtsp_url": "",
+      "line_ratio_y": 0.55,
+      "enabled": true
+    },
+    {
+      "id": "CCTV-002",
+      "name": "Batas Kota Barat (Simulasi)",
+      "ip": "192.168.1.102",
+      "rtsp_url": "",
+      "line_ratio_y": 0.55,
+      "enabled": true
+    },
+    {
+      "id": "CCTV-003",
+      "name": "Batas Kota Selatan (Simulasi)",
+      "ip": "192.168.1.103",
+      "rtsp_url": "",
+      "line_ratio_y": 0.55,
+      "enabled": true
+    },
+    {
+      "id": "CCTV-004",
+      "name": "Batas Kota Utara (Simulasi)",
+      "ip": "192.168.1.104",
+      "rtsp_url": "",
+      "line_ratio_y": 0.55,
+      "enabled": true
+    }
+  ]
+}
