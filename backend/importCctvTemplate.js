@@ -4,7 +4,10 @@ const path = require('path');
 const mysql = require('mysql2/promise');
 
 async function main() {
-  const filePath = path.resolve(__dirname, '../templates/cctv_import_template.csv');
+  let filePath = path.resolve(__dirname, '../templates/cctv_import_real.csv');
+  if (!fs.existsSync(filePath)) {
+    filePath = path.resolve(__dirname, '../templates/cctv_import_template.csv');
+  }
   const csvText = fs.readFileSync(filePath, 'utf8');
   const lines = csvText.split(/\r?\n/).filter((line) => line.trim() !== '');
 
