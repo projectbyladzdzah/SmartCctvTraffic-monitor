@@ -108,11 +108,11 @@ export function useCctvData() {
     setShowForm(true);
   }, []);
 
-  const filteredCctvs = useMemo(
-    () => cctvs.filter((c) =>
-      c.name.toLowerCase().includes(searchTerm.toLowerCase()) || c.ip.includes(searchTerm)),
-    [cctvs, searchTerm]
-  );
+  const filteredCctvs = useMemo(() => {
+    const safeCctvs = Array.isArray(cctvs) ? cctvs : [];
+    return safeCctvs.filter((c) =>
+      c.name.toLowerCase().includes(searchTerm.toLowerCase()) || c.ip.includes(searchTerm));
+  }, [cctvs, searchTerm]);
 
   const sortedAndFilteredCctvs = useMemo(() => [...filteredCctvs].sort((a, b) => {
     if (sortMode === 'total') return 0;
@@ -127,11 +127,14 @@ export function useCctvData() {
     return 0;
   }), [filteredCctvs, sortMode]);
 
-  const stats = useMemo(() => ({
-    total: cctvs.length,
-    online: cctvs.filter((c) => c.status === 'online').length,
-    offline: cctvs.filter((c) => c.status === 'offline').length,
-  }), [cctvs]);
+  const stats = useMemo(() => {
+    const safeCctvs = Array.isArray(cctvs) ? cctvs : [];
+    return {
+      total: safeCctvs.length,
+      online: safeCctvs.filter((c) => c.status === 'online').length,
+      offline: safeCctvs.filter((c) => c.status === 'offline').length,
+    };
+  }, [cctvs]);
 
   return {
     cctvs,

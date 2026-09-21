@@ -78,7 +78,7 @@ export default function SnapshotRecapPage({ onBack }) {
         date: selectedDate,
         scheduleId: scheduleFilter === 'all' ? '' : scheduleFilter,
       });
-      setItems(data || []);
+      setItems(Array.isArray(data) ? data : []);
     } catch (err) {
       if (!isAutoRefresh) setError(err.message || 'Gagal memuat rekap');
     } finally {
@@ -137,9 +137,10 @@ export default function SnapshotRecapPage({ onBack }) {
   }, []);
 
   const filteredItems = useMemo(() => {
+    const safeItems = Array.isArray(items) ? items : [];
     const keyword = searchTerm.trim().toLowerCase();
 
-    return items.filter((item) => {
+    return safeItems.filter((item) => {
       const displayStatus = getDisplayStatus(item);
       const matchesFilter =
         filter === 'jelas' ? displayStatus === 'jelas'
@@ -164,10 +165,11 @@ export default function SnapshotRecapPage({ onBack }) {
   }, [items, filter, searchTerm]);
 
   const summary = useMemo(() => {
-    const jelas = items.filter((item) => getDisplayStatus(item) === 'jelas').length;
-    const buram = items.filter((item) => getDisplayStatus(item) === 'buram').length;
-    const error = items.filter((item) => getDisplayStatus(item) === 'error').length;
-    return { jelas, buram, error, total: items.length };
+    const safeItems = Array.isArray(items) ? items : [];
+    const jelas = safeItems.filter((item) => getDisplayStatus(item) === 'jelas').length;
+    const buram = safeItems.filter((item) => getDisplayStatus(item) === 'buram').length;
+    const error = safeItems.filter((item) => getDisplayStatus(item) === 'error').length;
+    return { jelas, buram, error, total: safeItems.length };
   }, [items]);
 
   const formatDate = (value) => {

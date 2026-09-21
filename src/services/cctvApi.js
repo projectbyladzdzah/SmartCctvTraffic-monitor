@@ -617,7 +617,7 @@ async function getSnapshotsLatest() {
 
 async function getSnapshotsRecap({ status = '', cctvId = '', date = '', scheduleId = '' } = {}) {
   if (isDemoActive()) {
-    return { data: [], total: 0, page: 1, limit: 20 };
+    return [];
   }
   const params = new URLSearchParams();
   if (status) params.set('status', status);
@@ -636,8 +636,15 @@ async function getSnapshotsRecap({ status = '', cctvId = '', date = '', schedule
   return response.json();
 }
 
-// FUNGSI BARU UNTUK KONEKSI STREAM SSE
+// FUNGSI UNTUK KONEKSI STREAM SSE
 function createSnapshotStream() {
+  if (isDemoActive()) {
+    return {
+      onmessage: null,
+      onerror: null,
+      close: () => {},
+    };
+  }
   const token = getStoredToken();
   const query = token ? `?token=${encodeURIComponent(token)}` : '';
   return new EventSource(`${API_BASE}/api/snapshots/stream${query}`);
